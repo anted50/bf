@@ -105,8 +105,8 @@ export default function Home() {
       </main>
 
       <footer style={styles.footer}>
-        <p>Made with 💖 by AntHead</p>
-        <p>Also there is no backing out now</p>
+        <p className={'text-center'}>Made with 💖 by AntHead</p>
+        <p className={'text-center'}>Also there is no backing out now</p>
       </footer>
       <div style={styles.flowerBackground}></div>
       <div
