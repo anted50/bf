@@ -5,16 +5,23 @@ import Head from "next/head";
 
 export default function Page1() {
   const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error message
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent form from refreshing the page
     if (name.trim() === "") {
-      alert("Please enter your name!");
-    } else if (name.trim().toLowerCase() === "terri" || name.trim().toLowerCase() === "tergel" || name.trim().toLowerCase() === "spiky" || name.trim().toLowerCase() === "pookie") {
+      setErrorMessage("Please enter your name!"); // Set error message
+    } else if (
+      name.trim().toLowerCase() === "terri" ||
+      name.trim().toLowerCase() === "tergel" ||
+      name.trim().toLowerCase() === "spiky" ||
+      name.trim().toLowerCase() === "pookie"
+    ) {
+      setErrorMessage(""); // Clear error message
       router.push(`/page2?name=${encodeURIComponent(name)}`); // Pass name to page2
     } else {
-      alert("Sorry, this page is only for Terri or Tergel!");
+      setErrorMessage("Sorry, this page is not for u!"); // Set error message
     }
   };
 
@@ -39,6 +46,7 @@ export default function Page1() {
             Next
           </button>
         </form>
+        {errorMessage && <p style={styles.errorMessage}>{errorMessage}</p>} {/* Conditionally render error message */}
       </main>
       <div style={styles.flowerBackground}></div>
     </div>
@@ -102,5 +110,10 @@ const styles = {
     backgroundRepeat: "no-repeat",
     zIndex: 1,
     opacity: 0.5,
+  },
+  errorMessage: {
+    color: "#d9534f", // Red color for error message
+    fontSize: "1.25rem",
+    marginTop: "1rem",
   },
 };
