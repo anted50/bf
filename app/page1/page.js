@@ -33,7 +33,7 @@ export default function Page1() {
 
       <main style={styles.main}>
         <h1 style={styles.title}>Step 1: Who Are You? 🤔</h1>
-        <p style={styles.description}>Let us know your name:</p>
+        <p style={styles.description}>Let Me know your name:</p>
         <form onSubmit={handleSubmit} style={styles.form}>
           <input
             type="text"

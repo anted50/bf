@@ -1,10 +1,34 @@
-"use client"
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Head from "next/head";
 
-// pages/page2.js
-import Head from 'next/head';
-import Link from 'next/link';
+export default function page2() {
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error message
+  const router = useRouter();
 
-export default function Page2() {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent form from refreshing the page
+    if (name.trim() === "") {
+      setErrorMessage("Please enter your name!"); // Set error message
+    } else if (
+      name.trim().toLowerCase() === "anted" ||
+      name.trim().toLowerCase() === "floofy"  ||
+      name.trim().toLowerCase() === "temuulen" ||
+      name.trim().toLowerCase() === "spiky" ||
+      name.trim().toLowerCase() === "anthead"
+      
+    ) {
+      setErrorMessage(""); // Clear error message
+      router.push(`/final?name=${encodeURIComponent(name)}`); // Pass name to page2
+    } else if (name.trim().toLowerCase() === "boyfriend" || name.trim().toLowerCase() === "bf"){
+      setErrorMessage("not yet!"); // Set error message
+    } else {
+      setErrorMessage()
+    }
+  };
+
   return (
     <div style={styles.container}>
       <Head>
@@ -12,9 +36,21 @@ export default function Page2() {
       </Head>
 
       <main style={styles.main}>
-        <h1 style={styles.title}>Step 2: Are You Ready? 😌</h1>
-        <p style={styles.description}>One more step to go:</p>
-          <a style={styles.button} href="/final">Finish</a>
+        <h1 style={styles.title}>Step 2: Who Am I? 🤔</h1>
+        <p style={styles.description}>Let Me Know Who I Am:</p>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={styles.input}
+          />
+          <button type="submit" style={styles.button}>
+            Next
+          </button>
+        </form>
+        {errorMessage && <p style={styles.errorMessage}>{errorMessage}</p>} {/* Conditionally render error message */}
       </main>
       <div style={styles.flowerBackground}></div>
     </div>
@@ -23,46 +59,65 @@ export default function Page2() {
 
 const styles = {
   container: {
-    minHeight: '100vh',
-    padding: '0 2rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
+    minHeight: "100vh",
+    padding: "0 2rem",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f9f9f9",
   },
   main: {
-    textAlign: 'center',
-    zIndex: 2
+    textAlign: "center",
+    zIndex: 2,
   },
   title: {
-    fontSize: '3rem',
-    color: '#333',
+    fontSize: "3rem",
+    color: "#333",
   },
   description: {
-    fontSize: '1.5rem',
-    margin: '1rem 0',
-    color: '#666',
+    fontSize: "1.5rem",
+    margin: "1rem 0",
+    color: "#666",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "1rem",
+  },
+  input: {
+    padding: "0.5rem 1rem",
+    fontSize: "1rem",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    width: "250px",
   },
   button: {
-    marginTop: '2rem',
-    padding: '1rem 2rem',
-    fontSize: '1.25rem',
-    color: '#fff',
-    backgroundColor: '#0070f3',
-    textDecoration: 'none',
-    borderRadius: '5px',
+    padding: "0.75rem 2rem",
+    fontSize: "1.25rem",
+    color: "#fff",
+    backgroundColor: "#0070f3",
+    textDecoration: "none",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer",
   },
   flowerBackground: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundImage: 'url("/flower-pattern.png")',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
+    width: "100%",
+    height: "100%",
+    backgroundImage: "url('/flower-pattern.png')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     zIndex: 1,
     opacity: 0.5,
+  },
+  errorMessage: {
+    color: "#d9534f", // Red color for error message
+    fontSize: "1.25rem",
+    marginTop: "1rem",
   },
 };
