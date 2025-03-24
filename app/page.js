@@ -7,13 +7,12 @@ export default function Home() {
   return (
     <div style={styles.container}>
       <Head>
-        <title>Welcome</title>
+        <title>NMIT Drift Racing Leaderboard</title>
       </Head>
 
       <main style={styles.main}>
-        <h1 style={styles.title}>Welcome to Your Journey! 🌸</h1>
-        <p style={styles.description}>Click below to begin:</p>
-          <a style={styles.button} href="/page1">Start</a>
+        <h1 style={styles.title}>Welcome to NMIT Drift Racing Championship</h1>
+        
       </main>
 
       <div style={styles.flowerBackground}></div>
